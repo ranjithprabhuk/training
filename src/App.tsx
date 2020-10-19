@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { DisplayName, InputComponent } from './components';
 
 function App() {
+  const [userInfo, setUserInfo] = useState<{ username?: string, passowrd?: string, encryptionKey?: string }>({});
+
+  const handleChange = (value: string, key: string) => {
+    const newUserInfo = {...userInfo, [key]: value };
+    setUserInfo(newUserInfo);
+
+    console.log('new user info', newUserInfo);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DisplayName name='Smart ERP' />
+      <DisplayName name='Ranjth' />
+      <DisplayName withBorder name='App Knit' />
+      <DisplayName name='Flow' />
+      <DisplayName withBorder name='Training' />
+
+      <br />
+      <br />
+      <br />
+      <div>
+        <InputComponent type='text' onValueChange={(newValue) => handleChange(newValue, 'username')} />
+        <InputComponent type='password' onValueChange={(newValue) => handleChange(newValue, 'password')} />
+        <InputComponent type='text' value='some value' onValueChange={(newValue) => handleChange(newValue, 'encryptionKey')} />
+      </div>
     </div>
   );
 }

@@ -7,7 +7,13 @@ interface IProduct {
   name: string;
   rating: number;
   description?: string;
+  price?: number;
 };
+
+interface ISellerInfo {
+  name: string;
+  address: string;
+}
 
 interface IStreet {
   firstLine: string;
@@ -88,4 +94,30 @@ const productState: Pick<IApplicationState, 'categories' | 'products'> = {
 const userDetails: Pick<IUserInfo, 'firstName' | 'email'>  = {
   firstName: 'sdsdsds',
   email: 'sdsdsdds'
+};
+
+// extending
+interface IDetailedProductInfo extends IProduct {
+  price: number;
+  sellerInfo: ISellerInfo;
+};
+
+interface IDetailedProduct {
+  price: number;
+  sellerInfo: string;
+
+}
+
+const productInfo: IProduct & IDetailedProduct = {
+  name: 'asasa',
+  rating: 5,
+  description: 'sdsdsd',
+  price: 5,
+  sellerInfo: ''
+};
+
+const getuserName = (): never => {
+  if(false) {
+    return;
+  }
 };

@@ -1,12 +1,15 @@
 import { isImportClause } from "typescript";
 
-interface ISimpleGenric<T, AT> {
+interface ISimpleGenric<T, AT, B> {
   value: T;
   data: AT;
   json: AT;
+  isAvailable: boolean;
+  name?: string;
+  id: number;
 }
 
-const simpleValue: ISimpleGenric<string, number> = {
+const simpleValue: ISimpleGenric<string, number, boolean> = {
   value: 'sdsdsd',
   data: 1212,
   json: 1212

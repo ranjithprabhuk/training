@@ -121,3 +121,10 @@ const getuserName = (): never => {
     return;
   }
 };
+
+
+const SimpleFunctionalComponent: React.FC  = (props) => {
+  return (
+    <div></div>
+  )
+}

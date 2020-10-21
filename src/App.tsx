@@ -1,33 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef,  useContext,  } from 'react';
 import './App.css';
-import { DisplayName, InputComponent } from './components';
+import { Counter, DisplayName, InputComponent, UserInfo } from './components';
+import { Simple } from './components/Simple/Simple';
 
 function App() {
-  const [userInfo, setUserInfo] = useState<{ username?: string, passowrd?: string, encryptionKey?: string }>({});
+  // const [userInfo, setUserInfo] = useState<{ username?: string, passowrd?: string, encryptionKey?: string }>({});
 
-  const handleChange = (value: string, key: string) => {
-    const newUserInfo = {...userInfo, [key]: value };
-    setUserInfo(newUserInfo);
+  // const handleChange = (value: string, key: string) => {
+  //   const newUserInfo = {...userInfo, [key]: value };
+  //   setUserInfo(newUserInfo);
 
-    console.log('new user info', newUserInfo);
-  };
+  //   console.log('new user info', newUserInfo);
+  // };
+
+  const [isDisplayed, setIsDisplayed] = useState<boolean>(true);
 
   return (
     <div className="App">
-      <DisplayName name='Smart ERP' />
-      <DisplayName name='Ranjth' />
-      <DisplayName withBorder name='App Knit' />
-      <DisplayName name='Flow' />
-      <DisplayName withBorder name='Training' />
-
-      <br />
-      <br />
-      <br />
-      <div>
-        <InputComponent type='text' onValueChange={(newValue) => handleChange(newValue, 'username')} />
-        <InputComponent type='password' onValueChange={(newValue) => handleChange(newValue, 'password')} />
-        <InputComponent type='text' value='some value' onValueChange={(newValue) => handleChange(newValue, 'encryptionKey')} />
+      React Application Updated 
+      {/* <div>
+        <Counter />
       </div>
+      <div>
+        <button type="button" onClick={() => setIsDisplayed(x => !x)}>
+          Toggle
+        </button>
+      </div>
+      <div id="user-info">
+        {isDisplayed && <UserInfo lastLogin={'some date'}  />}
+        <div>
+        <UserInfo lastLogin={'some date'}  />
+        <UserInfo lastLogin={'some date'}  />
+        <UserInfo lastLogin={'some date'}  />
+        <UserInfo lastLogin={'some date'}  />
+        </div>
+      </div> */}
+      <div>
+        <Simple name='training' />
+        <Simple name='Smart' age={21} />
+
+      </div>
+
     </div>
   );
 }

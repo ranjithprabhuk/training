@@ -7,8 +7,6 @@ interface Props {
 
 export const Simple: React.FC<Props> = (props: Props) => {
   const [display, setDisplay] = useState<boolean>(false);
-  const [userInfo, setUserInfo] = useState<{name: string, email: string}>({name: '', email: ''});
-  const [products, setProductInfo] = useState<Array<any>>([]);
 
   const renderAge = () => {
     return props.age ? `, Age: ${props.age}` : null;

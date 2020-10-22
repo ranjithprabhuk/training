@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+
+.product {
+  width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #eee;
+  float: left;
+  margin: 5px;
+}
+
+
+.cart {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 150px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #eee;
+  background-color: #61dafb;
+}

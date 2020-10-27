@@ -1,11 +1,32 @@
-import React, { useState, useEffect, useRef, useContext, } from 'react';
+import React, { createContext, useState, useEffect, useRef, useContext } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+import styled from 'styled-components';
 import './App.css';
 import { Cart, Counter, DisplayName, InputComponent, Product, ProductInfo, ProductList, Products } from './components';
 import { Simple } from './components/Simple/Simple';
-import productInfo, { product, Rating } from './data/productInfo';
+import productInfo, { ISeller, product, Rating, sellerInfo } from './data/productInfo';
 
-// import { Cart } from './components/Cart'
+export const SellerContext = createContext<ISeller>();
+
+export const FlexBox = styled.div`
+  display: flex;
+`;
+
+const SpanComponent = styled.span`
+
+`;
+
+const HeaderContainer = styled(FlexBox)`
+  width: 100vw;
+  height: 60px;
+  justify-content: space-between;
+  background-color: #bbb;
+`;
+
+const AppContainer = styled(FlexBox)`
+  flex-direction: column;
+  overflow-x: hidden;
+`;
 
 function App() {
   // const [userInfo, setUserInfo] = useState<{ username?: string, passowrd?: string, encryptionKey?: string }>({});
@@ -36,6 +57,8 @@ function App() {
     console.log('data >>', data);
   };
 
+
+
   /**
    * component completes mounting - componentDidMount
    * component get updated - componentDidUpdate
@@ -63,7 +86,18 @@ function App() {
   // getProductDetails();
 
   return (
-    <div className="App">
+    <AppContainer>
+      <HeaderContainer>
+        <FlexBox>
+          Menu
+        </FlexBox>
+        <FlexBox>
+          <h2> Shopping Application</h2>
+        </FlexBox>
+        <FlexBox>
+          <Cart list={cartProducts} counter={counter} />
+        </FlexBox>
+      </HeaderContainer>
       <h1 ref={headerElement}>React Application</h1>
       {/* <div>
         <button type="button" onClick={() => updateCounter(x => ++x)}>
@@ -100,19 +134,28 @@ function App() {
         Image of the Product
       </div> */}
 
-      {/* <div>
-        <ProductList list={productInfo} addToCart={addToCart} updateTitle={updateTitle} />
-      </div> */}
-      <div>
-        {/* <Product title={'New Product'} price={5} addToCart={addToCart} updateTitle={updateTitle}/> */}
-      </div>
-      <div>
-        {counter % 4 !== 0 && (
-          <Cart list={cartProducts} counter={counter} />
-        )}
-      </div>
+      <SellerContext.Provider value={
+        {
+          name: 'smart erp',
+          rating: counter,
+          updateRating: updateCounter,
+          updateTitle: updateTitle,
+          addToCart,
+        }
+      }>
+        <FlexBox>
+          <ProductList list={productInfo} />
+        </FlexBox>
+        <div>
+          {/* <Product title={'New Product'} price={5} addToCart={addToCart} updateTitle={updateTitle}/> */}
+        </div>
+      </SellerContext.Provider>
 
-      <BrowserRouter>
+      {/* <button type='button' onClick={() => updateCounter(prev => ++prev)}>
+        Increment Counter
+      </button> */}
+
+      {/* <BrowserRouter>
         <div>
           <ul>
             <li>
@@ -129,8 +172,8 @@ function App() {
         <Route path="/" component={Counter} exact={true} />
         <Route path="/products" component={Products} />
         <Route path="/product/:id" component={ProductInfo} />
-      </BrowserRouter>
-    </div>
+      </BrowserRouter> */}
+    </AppContainer>
   );
 }
 
@@ -155,4 +198,11 @@ export default App;
    * component un mounts - componentWillUnmount
  *
  * React Hooks - useRef
+ * React Hooks - useContext, createContext
+  * to pas data from any component to any other component
+  * provider - which will provide the data
+  * consumer - which will give you the option to consume the data
+  *
+* Styled Components
+* - npm i styled-components  - npm i @types/styled-components -D
  */

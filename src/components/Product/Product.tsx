@@ -1,25 +1,44 @@
-import React, { PropsWithChildren, useRef, useState } from 'react';
+import React, { PropsWithChildren, useRef, useState, useContext } from 'react';
+import styled from 'styled-components';
+import { SellerContext } from '../../App';
+import { ISeller } from '../../data/productInfo';
+import { ButtonBase } from '../ButtonBase';
 import { DisplayName } from '../DisplayName';
+// import { FlexBox } from '../../App';
+
 
 interface Props {
   id?: number;
   title: string;
   price: number;
-  addToCart?: (product: any) => void;
-  updateTitle: (data: {title: string, id: number}) => void;
 }
+
+const ProductContainer = styled.div`
+  width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`;
 
 export const Product: React.FC<Props> = (props: PropsWithChildren<Props>) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(props.title);
 
+  // use context react hook
+  const sellerInfo: ISeller = useContext(SellerContext);
+  console.log('seller info', sellerInfo);
+
   // uer ref
   const inputElementRef = useRef() as React.RefObject<HTMLInputElement>;
   const titleInputRef = useRef() as React.RefObject<HTMLInputElement>;
 
   const handeAddToCart = () => {
-    props.addToCart && props.addToCart({
+    sellerInfo.addToCart && sellerInfo.addToCart({
       title: props.title,
       price: props.price,
       quantity,
@@ -38,30 +57,45 @@ export const Product: React.FC<Props> = (props: PropsWithChildren<Props>) => {
 
   const updateTitle = () => {
     setIsEdit(false);
-    props.updateTitle({title, id: props.id || 0});
-    console.log('title ref >>', titleInputRef.current?.setAttribute('type', 'password'));
-    
+    sellerInfo.updateTitle?.({title, id: props.id || 0});
+    // console.log('title ref >>', titleInputRef.current?.setAttribute('type', 'password'));
+  }
+
+  const decrementRating = () => {
+    // sellerInfo.updateRating?.(rating); // same code rewritten below
+    if (sellerInfo.updateRating) {
+      sellerInfo.updateRating(--sellerInfo.rating);
+    }
+  }
+
+  const incrementRating = () => {
+    // sellerInfo.updateRating?.(rating); // same code rewritten below
+    if (sellerInfo.updateRating) {
+      sellerInfo.updateRating(++sellerInfo.rating);
+    }
   }
 
   return (
-    <div className={'product'}>
+    <ProductContainer>
 
       {!isEdit && <h3 onClick={() => setIsEdit(true)}>Name: {title}</h3>}
       {<div>
         <input type="text" value={title} onChange={handleTitleChange} ref={titleInputRef} />
-        <button type="button" onClick={() => updateTitle()}>Update</button>
+        <ButtonBase type="button" onClick={() => updateTitle()} disabled={true}>Update</ButtonBase>
       </div>}
 
       <h6>Price: {props.price}</h6>
       <div>{props.children}</div>
+      <h6 onClick={incrementRating}>Seller Name:{sellerInfo.name}</h6>
+      <div onClick={() => decrementRating()}>Seller Rating: {sellerInfo.rating}</div>
 
       <div>
         <input type="number" min="1" max="5" onChange={handleQuantityChange} ref={inputElementRef} />
       </div>
 
-      <button type="button" onClick={() => handeAddToCart()}>
+      <ButtonBase type="button" onClick={() => handeAddToCart()} pad={'20px'}>
         Add to Cart
-      </button>
-    </div>
+      </ButtonBase>
+    </ProductContainer>
   )
 };

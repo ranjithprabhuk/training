@@ -7,3 +7,4 @@ export { ProductList } from './ProductList';
 export { Cart } from './Cart';
 export { Products } from './Products';
 export { ProductInfo } from './ProductInfo';
+export { ButtonBase } from './ButtonBase';

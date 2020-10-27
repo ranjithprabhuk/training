@@ -102,6 +102,25 @@ export enum Rating {
   Best
 }
 
+export interface ISeller  {
+name: string;
+description: string;
+rating: number;
+updateRating?: (rating: number) => void;
+updateTitle?: (data: {title: string, id: number}) => void;
+addToCart?: (product: any) => void;
+}
+
+export const sellerInfo: ISeller = {
+  name: 'Smart ERP',
+  description: ' he is a seller',
+  rating: 4,
+  updateRating: (rating: number) => {
+    console.log('datda');
+    sellerInfo.rating = rating;
+  }
+};
+
  export default productInfo;
 
 

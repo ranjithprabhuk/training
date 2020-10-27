@@ -1,6 +1,8 @@
 import React from 'react'
 import { DisplayName } from '../DisplayName'
 import { Product } from '../Product/Product'
+import { FlexBox } from '../../App';
+import styled from 'styled-components';
 
 interface Product {
   id: number;
@@ -11,27 +13,29 @@ interface Product {
 
 interface Props {
   list: Array<Product>;
-  addToCart?: (product: any) => void;
-  updateTitle: (data: {title: string, id: number}) => void;
 }
+
+const ProductListContainer = styled.div`
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+`;
 
 export const ProductList: React.FC<Props> = (props: Props) => {
     return (
-    <div>
+    <ProductListContainer>
       {props.list?.map((product, index) => (
-        <div key={`${product.title}_${index}`}>
+        <FlexBox key={`${product.title}_${index}`}>
           <Product
             id={product.id}
             title={product.title}
             price={product.price}
-            addToCart={props.addToCart}
-            updateTitle={({title, id})  => props.updateTitle({title, id})}
           >
             <DisplayName name={product.description || ''} />
             
           </Product>
-        </div>
+        </FlexBox>
       ))}
-    </div>
+    </ProductListContainer>
   )
 };

@@ -20,7 +20,7 @@ export class UserInfo extends Component<IProps, any> {
 
     if (user) {
       const userInfo = JSON.parse(user);
-      this.setState({...userInfo});
+      // this.setState({...userInfo});
     } else {
       // call the service to get the data
       const responseFromService = {
@@ -29,7 +29,7 @@ export class UserInfo extends Component<IProps, any> {
       };
 
       localStorage.setItem('userInfo', JSON.stringify(responseFromService));
-      this.setState({...responseFromService});
+      // this.setState({...responseFromService});
     }
     console.log('am subcribing')
     // document.addEventListener('click', () => {console.log('document clicked')});
@@ -51,7 +51,7 @@ export class UserInfo extends Component<IProps, any> {
           Email: {this.state.email}
         </div>
         <div>
-          Date and Time of Login: {this.props.lastLogin}
+          {/* Date and Time of Login: {this.props.lastLogin} */}
         </div>
       </div>
     )

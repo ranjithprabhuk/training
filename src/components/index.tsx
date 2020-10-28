@@ -8,3 +8,5 @@ export { Cart } from './Cart';
 export { Products } from './Products';
 export { ProductInfo } from './ProductInfo';
 export { ButtonBase } from './ButtonBase';
+export { StyledInput } from './StyledInput';
+

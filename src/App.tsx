@@ -85,8 +85,13 @@ function App() {
 
   // getProductDetails();
 
+  const handleInputChange = (value: string) => {
+    console.log('value', value);
+  }
+
   return (
     <AppContainer>
+      <p>learn react</p>
       <HeaderContainer>
         <FlexBox>
           Menu
@@ -173,6 +178,7 @@ function App() {
         <Route path="/products" component={Products} />
         <Route path="/product/:id" component={ProductInfo} />
       </BrowserRouter> */}
+      <InputComponent type='text' onValueChange={(val: string) => handleInputChange(val)} />
     </AppContainer>
   );
 }

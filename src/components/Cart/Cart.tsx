@@ -35,7 +35,7 @@ export const Cart: React.FC<Props> = ({ list, counter, displayAll }: Props) => {
 
   return (
     <CartContainer>
-      {list.length}<br />Products
+      {list.length}<br /> {!displayAll && <p>Products</p>}
       {displayAll && <div>
       Title - Price - Qty
       </div>}

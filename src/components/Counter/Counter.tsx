@@ -4,15 +4,15 @@ export const Counter: React.FC = () => {
   const [value, setValue] = useState(0);
   return (
     <div>
-      Counter: {value}
+      Counter: <div data-testid={'counter-value'}>{value}</div>
       <div>
         <div>
-          <button type="button" onClick={() => setValue(val => ++val)}>
+          <button type="button" onClick={() => setValue(val => ++val)} data-testid={'increment'}>
             Increment
         </button>
         </div>
         <div>
-          <button type="button" onClick={() => setValue(val => --val)}>
+          <button type="button" onClick={() => setValue(val => --val)}  data-testid={'decrement'}>
             Decrement
         </button>
         </div>
